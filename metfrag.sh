@@ -47,5 +47,9 @@ FIleOutName=$(basename ${filename%.*}.csv)
 java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $filename` ResultsFile=resultsmet/${FIleOutName} NumberThreads=1 $PARAM " LocalDatabasePath=${DB}
 done
 
-zip -r -j $OUTPUT tmpmetf/*.*
+zip -r -j ${OUTPUT} tmpmetf/*.*
+
+
+
+
 

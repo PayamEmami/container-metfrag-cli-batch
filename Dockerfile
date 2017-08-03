@@ -28,6 +28,7 @@ RUN chmod +x /usr/local/bin/runTest1.sh
 ADD metfrag.sh /usr/local/bin/metfrag.sh
 RUN chmod +x /usr/local/bin/metfrag.sh
 
+RUN apt-get -y install zip
 # Define Entry point script
 #ENTRYPOINT ["java", "-jar", "/usr/local/bin/MetFragCLI.jar"]
 
