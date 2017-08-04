@@ -39,14 +39,17 @@ mkdir -p tmpmetf
 mkdir -p resultsmet
 unzip "${ZIPFILE}" -d tmpmetf
 
-
+counter=0
 for filename in tmpmetf/*.*; do
-
+counter=$((counter+1))
 FIleOutName=$(basename ${filename%.*}.csv)
 
-java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $filename` ResultsFile=resultsmet/${FIleOutName} NumberThreads=1 $PARAM " LocalDatabasePath=${DB}
-done
+java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $filename` ResultsFile=resultsmet/${FIleOutName} NumberThreads=1 $PARAM " LocalDatabasePath=${DB}&
 
+if (( $counter % 10 == 0 )); then wait; fi # Limit to 10 jobs at the same time
+
+done
+wait
 zip -r -j metfragres.zip resultsmet/*.*
 
 cp metfragres.zip ${OUTPUT}
